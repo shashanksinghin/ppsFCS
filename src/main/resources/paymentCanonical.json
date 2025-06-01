@@ -1,0 +1,41 @@
+{
+	"paymentInfo": {
+		"transactionId": "e64e06dc-77ca-4dc7-be04-aae330a5df0f",
+		"payerName": "John Self",
+		"payerBank": "SBI",
+		"payerCountryCode": "IND",
+		"payerAccountCode": "ABC123",
+		"payeeName": "John Doe",
+		"payeeBank": "YBank",
+		"payeeCountryCode": "IRQ",
+		"payeeAccountCode": "DEF456",
+		"paymentInstruction": "Loan",
+		"executionDate": "2025-04-14",
+		"amount": 1122.36,
+		"isoCurrency": "INR",
+		"creationTimestamp": "2025-04-14T13:35:55"
+	},
+	"paymentAudits": [
+		{
+			"paymentStatus": "SUCESSFUL",
+			"statusCode": "BS001",
+			"statusDesc": "BS Input received.",
+			"statusDateTime": "2025-04-20T18:31:10",
+			"paymentOperation": "BS_Input"
+		},
+		{
+			"paymentStatus": "SUCESSFUL",
+			"statusCode": "FCS002",
+			"statusDesc": "Rejected",
+			"statusDateTime": "2025-04-20T18:31:10",
+			"paymentOperation": "FCS"
+		},
+		{
+			"paymentStatus": "SUCESSFUL",
+			"statusCode": "BS002",
+			"statusDesc": "FCS response received.",
+			"statusDateTime": "2025-04-20T18:31:10",
+			"paymentOperation": "BS_Output"
+		}
+	]
+}

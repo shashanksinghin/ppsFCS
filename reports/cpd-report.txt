@@ -1,0 +1,15 @@
+Found a 10 line (29 tokens) duplication in the following files: 
+Starting at line 55 of D:\work\workspace\ppsFCS\src\main\java\com\pps\fcs\service\impl\FCSServiceImpl.java
+Starting at line 68 of D:\work\workspace\ppsFCS\src\main\java\com\pps\fcs\service\impl\FCSServiceImpl.java
+
+			if (paymentCanonical.getPaymentInfo().getPayeeCountryCode() != null && blacklistedPayeeCountry[i]
+					.equalsIgnoreCase(paymentCanonical.getPaymentInfo().getPayeeCountryCode())) {
+				isLegitimatePayment = false;
+				break;
+			}
+		}
+		return isLegitimatePayment;
+	}
+
+	private boolean validatePayerCountry(PaymentCanonical paymentCanonical) {
+
