@@ -27,6 +27,15 @@ public class FCSServiceImpl implements FCSService {
 	@Value("${blacklisted.payee.country}")
 	String[] blacklistedPayeeCountry;
 
+	@Value("${blacklisted.payer.bank}")
+	String[] blacklistedPayerBank;
+
+	@Value("${blacklisted.payee.bank}")
+	String[] blacklistedPayeeBank;
+
+	@Value("${blacklisted.paymentInstruction}")
+	String[] blacklistedPaymentInstruction;
+
 	@Override
 	public boolean processFCS(PaymentCanonical paymentCanonical) {
 
@@ -44,6 +53,18 @@ public class FCSServiceImpl implements FCSService {
 
 		if (isLegitimatePayment) {
 			isLegitimatePayment = validatePayerCountry(paymentCanonical);
+		}
+
+		if (isLegitimatePayment) {
+			isLegitimatePayment = validatePayerBank(paymentCanonical);
+		}
+
+		if (isLegitimatePayment) {
+			isLegitimatePayment = validatePayeeBank(paymentCanonical);
+		}
+
+		if (isLegitimatePayment) {
+			isLegitimatePayment = validatePaymentInstruction(paymentCanonical);
 		}
 
 		return isLegitimatePayment;
@@ -91,6 +112,42 @@ public class FCSServiceImpl implements FCSService {
 		for (int i = 0; i < blacklistedPayeeNames.length; i++) {
 
 			if (paymentCanonical.getPaymentInfo().getPayeeName().equalsIgnoreCase(blacklistedPayeeNames[i])) {
+				isLegitimatePayment = false;
+				break;
+			}
+		}
+		return isLegitimatePayment;
+	}
+
+	private boolean validatePayerBank(PaymentCanonical paymentCanonical) {
+		boolean isLegitimatePayment = true;
+		for (int i = 0; i < blacklistedPayerBank.length; i++) {
+
+			if (paymentCanonical.getPaymentInfo().getPayerBank().equalsIgnoreCase(blacklistedPayerBank[i])) {
+				isLegitimatePayment = false;
+				break;
+			}
+		}
+		return isLegitimatePayment;
+	}
+
+	private boolean validatePayeeBank(PaymentCanonical paymentCanonical) {
+		boolean isLegitimatePayment = true;
+		for (int i = 0; i < blacklistedPayeeBank.length; i++) {
+
+			if (paymentCanonical.getPaymentInfo().getPayeeBank().equalsIgnoreCase(blacklistedPayeeBank[i])) {
+				isLegitimatePayment = false;
+				break;
+			}
+		}
+		return isLegitimatePayment;
+	}
+
+	private boolean validatePaymentInstruction(PaymentCanonical paymentCanonical) {
+		boolean isLegitimatePayment = true;
+		for (int i = 0; i < blacklistedPaymentInstruction.length; i++) {
+
+			if (paymentCanonical.getPaymentInfo().getPaymentInstruction().equalsIgnoreCase(blacklistedPaymentInstruction[i])) {
 				isLegitimatePayment = false;
 				break;
 			}
